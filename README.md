@@ -28,7 +28,7 @@ flask_rest_api/
 Clone the repository:
 
 ```sh
-git clone https://github.com/javedansari81/sunrise-backend.git
+git clone https://github.com/javedansari81/sunrise-backend-v3.git
 cd sunrise-backend
 
 ## Create and activate a virtual environment:
