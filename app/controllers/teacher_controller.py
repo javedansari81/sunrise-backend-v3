@@ -4,6 +4,7 @@ from flasgger import swag_from
 from app.models.teacher_model import TeacherModel
 from app.models.teacher_detail_model import TeacherDetailModel
 from app import mongo
+from app.utils.image_utils import resize_image
 
 teacher_model = TeacherModel(mongo)
 teacher_detail_model = TeacherDetailModel(mongo)
@@ -21,6 +22,10 @@ def create_teacher():
         "position": data["position"],
         "isActive": 1
     }
+    # Check if the image is present in the request
+    if data.get("teacherImage"):
+        teacher_data["img"] = resize_image(data["teacherImage"])
+    
     teacher_id = teacher_model.create(teacher_data)
 
     # Save to teacher-detail collection
