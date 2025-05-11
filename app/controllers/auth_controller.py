@@ -15,7 +15,18 @@ def login():
 
     # Find the user by email
     user = user_model.find_one({"email": email})
-    if not user or not app.bcrypt.check_password_hash(user["password"], password):
+    if not user:
+        return jsonify({"msg": "Invalid email or password"}), 401
+    
+    # Check if password is hashed (starts with $2b$)
+    if user["password"].startswith("$2b$"):
+        # Verify hashed password
+        password_correct = app.bcrypt.check_password_hash(user["password"], password)
+    else:
+        # Plain text comparison (for development only)
+        password_correct = user["password"] == password
+    
+    if not password_correct:
         return jsonify({"msg": "Invalid email or password"}), 401
 
     # Create JWT token
@@ -25,7 +36,7 @@ def login():
             'email': user['email'],
             'firstName': user['firstName'],
             'lastName': user['lastName'],
-            'mobile': user['mobile'],  # Adjust based on your user schema
+            'mobile': user['mobile'],
             'userType': user['userType']
         }
     return jsonify({
