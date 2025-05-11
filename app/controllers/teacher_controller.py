@@ -18,7 +18,7 @@ def create_teacher():
         "gender": data["gender"],
         "img": data["teacherImage"],
         "name": data["name"],
-        "email":data["email"],
+        #"email":data["email"],
         "position": data["position"],
         "isActive": 1
     }
@@ -54,7 +54,7 @@ def get_teachers():
         teacher_data = {
             '_id': str(teacher['_id']),
             'name': teacher['name'],
-            'email':teacher['email'],
+            #'email':teacher['email'],
 
             'age': teacher['age'],
             'gender': teacher['gender'],
@@ -91,7 +91,7 @@ def get_teacher(teacher_id):
     response_data = {
         '_id': str(teacher['_id']),
         'name': teacher['name'],
-        "email":teacher["email"],
+        #"email":teacher["email"],
 
         'age': teacher['age'],
         'gender': teacher['gender'],
@@ -114,7 +114,7 @@ def update_teacher(teacher_id):
         return jsonify({'error': 'Teacher not found'}), 404
     teacher_data = {
         'name': data['name'],
-        "email":data["email"],
+        #"email":data["email"],
 
         'age': data['age'],
         'gender': data['gender'],
